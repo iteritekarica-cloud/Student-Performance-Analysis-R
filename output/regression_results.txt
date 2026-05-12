@@ -1,0 +1,29 @@
+
+Call:
+lm(formula = G3 ~ avg_grade + studytime + failures + absences + 
+    sex + freetime + goout + Dalc + Walc + health, data = student)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-9.0855 -0.6130  0.0937  0.9166  3.2458 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept) -0.16027    1.21245  -0.132   0.8950    
+avg_grade    1.16608    0.04102  28.429   <2e-16 ***
+studytime   -0.45978    0.26270  -1.750   0.0815 .  
+failures    -0.38665    0.30190  -1.281   0.2017    
+absences     0.02950    0.02531   1.165   0.2451    
+sexM         0.18670    0.26732   0.698   0.4857    
+freetime    -0.17246    0.14210  -1.214   0.2262    
+goout        0.02953    0.13398   0.220   0.8258    
+Dalc        -0.09269    0.19948  -0.465   0.6426    
+Walc         0.19983    0.13721   1.456   0.1468    
+health      -0.04368    0.09161  -0.477   0.6340    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 1.671 on 213 degrees of freedom
+Multiple R-squared:  0.814,	Adjusted R-squared:  0.8053 
+F-statistic: 93.22 on 10 and 213 DF,  p-value: < 2.2e-16
+
