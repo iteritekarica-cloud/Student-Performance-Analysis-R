@@ -1,29 +1,29 @@
-This project predicts final academic grades (G3) for secondary school students using a dataset of 1,044 records from Mathematics and Portuguese courses. The analysis focuses on identifying how academic history and social habits impact students who report moderate-to-high study efforts.
-Technical Workflow
-
-* Data Merging: Combined `student-mat.csv` and `student-por.csv` to analyze universal trends across subjects.
-* Filtering: Focused on students with `studytime > 2` to isolate factors affecting those already putting in significant effort.
-* Feature Engineering: Created `avg_grade` (mean of G1 and G2) and a `study_per_failure` resilience ratio.
-* Modeling: Fitted a multiple linear regression model testing variables like absences, failures, and alcohol consumption (`Dalc`, `Walc`).
-Key Findings
-1. Model Performance
-The regression model achieved a Multiple R-squared of 0.814, meaning it explains over 81% of the variance in final grades.
-2. Predictors of Success
-
-* Academic Momentum: For every 1-point increase in a student's early-semester average (`avg_grade`), the final grade is predicted to increase by 1.16 points.
-* Past Failures: Historical setbacks (`failures`) have a negative impact on the final result (-0.38), even for students currently studying at high levels.
-* Diminishing Returns: In this high-study group, simply adding more study hours (`studytime`) showed a slightly negative coefficient (-0.45), indicating that the quality of prior performance is a stronger driver than the quantity of time spent.
+Student Performance Analysis
+This project implements a predictive model to estimate final student grades (G3) using demographic, social, and academic data. By integrating records from both Mathematics and Portuguese courses, the analysis identifies the primary drivers of academic success across a combined dataset of 1,044 students.
+The analysis focuses specifically on high-engagement students (where studytime > 2) to determine which social and academic factors impact those already putting in significant effort [User's code]. By calculating academic momentum (avg_grade) and a custom resilience metric (study_per_failure), the project isolates the most significant predictors of final outcomes [User's code].
+Methodology
+The analysis utilizes multiple linear regression to test the influence of academic history and lifestyle variables:
+Data Integration: Merges math and Portuguese datasets with identical 33-variable structures [1, 58, User's code].
+Feature Engineering: Calculates avg_grade (average of G1 and G2) and study_per_failure (study time relative to past failures) [User's code].
+Regression Specification: lm(G3 ~ avg_grade + studytime + failures + absences + sex + freetime + goout + Dalc + Walc + health) [User's code].
+Key Results
+Predictive Power: The model explains 81.4% of the variance in final grades (Multiple R-squared: 0.814) [User's results].
+Primary Driver: avg_grade is the strongest predictor with an estimate of 1.166, indicating that early-semester momentum is the most reliable indicator of final success [User's results].
+Model Reliability: The overall p-value of < 2.2e-16 demonstrates that the results are highly statistically significant [User's results].
 Visualizations
-Prior Performance vs Final Grade
-Shows the strong linear correlation between early-semester averages and the final G3 grade.
-Past Failures Impact
-Visualizes how a history of class failures correlates with lower final outcomes.
-Social Habits and Grades
-Explores the relationship between leisure time and academic results in the high-study subset.
-Project Structure
+  
+Example Code
+To execute the primary model after loading and merging the datasets:
+# Filter for high-effort students (studytime level 3 and 4)
+student <- data %>% filter(studytime > 2)
 
-* analysis.R: The full R script including data cleaning, filtering, and modeling.
-* output/regression_results.txt: The raw mathematical summary of the linear model.
-* output/*.png: Exported plots from the analysis.
-Dataset
-Data sourced from the [UCI Student Performance Dataset](https://www.google.com/url?sa=E&q=https%3A%2F%2Farchive.ics.uci.edu%2Fml%2Fdatasets%2Fstudent%2Bperformance) covering attributes such as family background, social activities, and health.
+# Multiple linear regression predicting final grade (G3)
+model <- lm(G3 ~ avg_grade + studytime + failures + absences + 
+            sex + freetime + goout + Dalc + Walc + health, 
+            data = student)
+
+# Review statistical coefficients and significance
+summary(model)
+Finding Out More
+Full Results: A detailed breakdown of all coefficients is available in output/regression_results.txt [User's results].
+Data Source: Dataset sourced from the UCI Machine Learning Repository
